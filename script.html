@@ -1,0 +1,294 @@
+ <!DOCTYPE html>
+ <html lang="hu">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyep árkalkukátor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <style>
+        body {
+            color: white;
+            font-family: sans-serif;
+            background-image: url(asd.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover; 
+            background-attachment: fixed;
+            margin: 0;     
+            text-align: center;
+        }
+
+        #szamolb {
+            border-radius: 5px;
+        }
+
+        #terulet {
+            border-radius: 5px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1vw 2.55vw;
+            color: white;
+            margin-top: 0.75%;
+            margin-right: 0.75%;
+            margin-left: 0.75%;
+            background-color: rgb(41, 39, 39);
+            border: 2px solid black;
+            border-radius: 1vw;
+            color: black;
+            font-size: 1.165vw;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 1.45vw;
+            font-size: 1.25vw;
+        }      
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: rgb(142, 173, 142);
+        }
+
+        .logo {
+            margin: 0;
+        }
+
+        .centerbe {
+            display: flex;
+            justify-content: center;
+            align-items: center;    
+            min-height: 100vh;
+        }
+
+        .calc-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 1.8vw;
+            border-radius: 10px;
+            color: black;
+            width: 44vw;
+            height: 13.2vw;
+            font-size: 1.17vw;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* mobilbarát */
+        }
+
+        .form-row label {
+            white-space: nowrap;
+        }
+
+        /*szövegbuborék*/
+         .container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* kis távolság a buborék és a szöveg között */
+            margin-top: -37.2%;
+            margin-left: 10%;
+        }
+
+       .bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 1.95vw;
+            padding: 0.8vw 1.55vw;
+            font-size: 1.7vw;
+            cursor: pointer;
+            box-shadow: 0 0 5px gray;
+            display: inline-block;
+            user-select: none;
+            z-index: 10;
+            color: black;
+        }
+
+        .bubble::after,
+        .bubble::before {
+            content: '';
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .bubble::before {
+            width: 0.6vw;
+            height: 0.6vw;
+            bottom: -1vw;
+            left: 1.5vw;
+        }
+
+        .bubble::after {
+            width: 0.6vw;
+            height: 0.6vw;
+            bottom: -1.75vw;
+            left: 1.1vw;
+        }
+
+
+        .text-box {
+            color: black;
+            display: none;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 15vw;
+            font-size: 1.2vw;
+        }
+
+        #master {
+            margin-left: -85%;
+            margin-top: -2.5%;
+            height: 18vw;
+            width: 18vw;
+        }
+
+        #sun {
+          transform: translateX(32px);
+        }
+
+        #moon {
+          transform: translateX(10px);
+        }
+
+        .divider {
+          width: 1px;
+          height: 20px;
+          background-color: gray;
+          align-self: center;
+          transform: translateX(20px);
+        }
+
+            #eredmeny {
+        min-height: 1.8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+        h1 {
+            font-size: 2.93vw;
+        }
+    </style>
+ </head>
+ <body>
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="script.html">Kalkulátor</a>
+            <a href="tamogatok_vilagos.html">Támogatók</a>
+        </div>
+
+        <h3 class="logo"><b><a href="index.html">GyepShop</a></b></h3>
+
+        <div class="nav-right">
+            <a href="autoink.html">Autóink</a>
+            <a href="beszállítók.html">Szállítók</a>
+
+            <a href="script.html"><svg xmlns="http://www.w3.org/2000/svg" width="1.38vw" height="1.38vw" fill="currentColor" class="bi bi-brightness-high-fill" viewBox="0 0 16 16" id="sun">
+            <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+            </svg>
+          </a>
+
+        <div class="divider"></div>
+
+        <a href="script_dark.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.35vw" height="1.35vw" fill="currentColor" class="bi bi-moon-stars-fill" viewBox="0 0 16 16" id="moon">
+              <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+              <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+            </svg>
+          </a>
+    </div>
+
+        </div>
+    </header>
+
+   <!--calc-->
+  <div class="centerbe">
+  <div class="calc-container">
+    <h1>Gyep árkalkulátor</h1>
+    
+    <div class="form-row">
+      <label for="terulet">Mennyi m² gyepet akarsz venni?</label>
+      <input type="number" id="terulet"/>
+      <button onclick="kalkulal()" id="szamolb">Számol</button>
+    </div>
+
+    <p id="eredmeny"></p>
+  </div>
+</div>
+
+<script>
+    function kalkulal() {
+        let input = document.getElementById("terulet").value.trim();
+
+        if (input === "") {
+            document.getElementById("eredmeny").innerText = "Nem is írtál be semmit te pancser! 👎";
+            return;
+        }
+
+        let a = Number(input);
+
+        if (isNaN(a)) {
+            document.getElementById("eredmeny").innerText = "Érvénytelen szám!";
+            return;
+        }
+
+        if (!Number.isInteger(a)) {
+            document.getElementById("eredmeny").innerText = "Ez nem egész szám te kis nigger! 🖕";
+            return;
+        }
+
+        if (Number(input) < 0) {
+            document.getElementById("eredmeny").innerText = "Ez negatív szám 😡😡😡"; 
+            return;
+        }
+
+        let huf = a * 2500;
+        document.getElementById("eredmeny").innerText = "Ennyibe fog kerülni: " + huf + " Ft";
+    }
+</script>
+
+
+    <div class="container">
+  <div class="bubble" onclick="toggleText()">...</div>
+  <div id="text" class="text-box">
+    Van gyeped báttya?
+  </div>
+</div>
+
+<script>
+  function toggleText() {
+    const textBox = document.getElementById("text");
+    textBox.style.display = textBox.style.display === "none" ? "block" : "none";
+  }
+
+  window.onload = function() {
+  document.getElementById("text").style.display = "none";
+};
+</script>
+
+<img src="./master.png" alt=""  id="master">
+ </body>
+ </html>
+ 
+ 
+ 
